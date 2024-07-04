@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Credit Card Fraud Detection</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="static/css/style.css" rel="stylesheet">
+
+    <style>
+        .rep_tab tr,
+        th,
+        td {
+            text-align: center;
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-lg-5">
+            <a href="{{ url_for('index')}}" class="navbar-brand ml-lg-3">
+                <h1 class="m-0 display-5 text-uppercase text-primary">Credit Fraud</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
+                <div class="navbar-nav m-auto py-0">
+                    <a href="{{ url_for('index')}}" class="nav-item nav-link">Home</a>
+                    <a href="{{ url_for('login')}}" class="nav-item nav-link">Login</a>
+                    <a href="{{ url_for('analysis')}}" class="nav-item nav-link active">Analysis</a>
+                    <a href="{{ url_for('prediction')}}" class="nav-item nav-link">Prediction</a>
+                </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Header Start -->
+    <div class="jumbotron jumbotron-fluid mb-5">
+        <div class="container text-center py-5">
+            <h1 class="text-white display-3">Analysis</h1>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- GRAPHS AND  TABLES GO HERE  -->
+    <h4 style="margin-left: 20px;">Logistic Regression :</h4><br>
+    <h5 style="margin-left: 35px;">Train Model Classification Report :</h5><br>
+    <div style="overflow-x : auto; margin-left: 10px;">
+        {% for table in log_tr_re %}
+        {{table | safe}}
+        {% endfor %}
+    </div>
+    <br>
+    <h5 style="margin-left: 35px;">Test Model Classification Report :</h5><br>
+    <div style="overflow-x : auto; margin-left: 10px;">
+        {% for table in log_te_re %}
+        {{table | safe}}
+        {% endfor %}
+    </div>
+    <br>
+    <h4 style="margin-left: 20px;">K Neighbors Classification :</h4><br>
+    <h5 style="margin-left: 35px;">Train Model Classification Report :</h5><br>
+    <div style="overflow-x : auto; margin-left: 10px;">
+        {% for table in knn_tr_re %}
+        {{table | safe}}
+        {% endfor %}
+    </div>
+    <br>
+    <h5 style="margin-left: 35px;">Test Model Classification Report :</h5><br>
+    <div style="overflow-x : auto; margin-left: 10px;">
+        {% for table in knn_te_re %}
+        {{table | safe}}
+        {% endfor %}
+    </div>
+    <!-- Footer Start -->
+
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

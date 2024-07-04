@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Credit Card Fraud Detection</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="static/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-lg-5">
+            <a href="{{ url_for('index')}}" class="navbar-brand ml-lg-3">
+                <h1 class="m-0 display-5 text-uppercase text-primary">Credit Fraud</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
+                <div class="navbar-nav m-auto py-0">
+                    <a href="{{ url_for('index')}}" class="nav-item nav-link">Home</a>
+                    <a href="{{ url_for('login')}}" class="nav-item nav-link">Login</a>
+                    <a href="{{ url_for('analysis')}}" class="nav-item nav-link">Analysis</a>
+                    <a href="{{ url_for('prediction')}}" class="nav-item nav-link active">Prediction</a>
+                    <a href="{{ url_for('index')}}" class="nav-item nav-link">Logout</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Header Start -->
+    <div class="jumbotron jumbotron-fluid mb-5">
+        <div class="container text-center py-5">
+            <h1 class="text-white display-3">About</h1>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <h4 style="margin-left: 15px;">Logistic Model :</h4>
+    <br>
+    <table style="margin-left: 25px;">
+        <form id="form1" action="{{ url_for('predict')}}" method="post">
+            <tr>
+                <td>
+                    <label for="sku">Time :</label>
+                </td>
+                <td>
+                    <input id="sku" name="sku" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="price">V1 :</label>
+                </td>
+                <td>
+                    <input id="price" name="price" type="number" placeholder="13" step="0.01"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="revenue_generated">V2 :</label>
+                </td>
+                <td>
+                    <input id="revenue_generated" name="revenue_generated" type="number" placeholder="13"
+                        step="0.01"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="lead_times">V3 :</label>
+                </td>
+                <td>
+                    <input id="lead_times" name="lead_times" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="shipping_costs">V4 :</label>
+                </td>
+                <td>
+                    <input id="shipping_costs" name="shipping_costs" type="number" placeholder="13" step="0.01"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="lead_time">V5 :</label>
+                </td>
+                <td>
+                    <input id="lead_time" name="lead_time" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="production_volumes">V6 :</label>
+                </td>
+                <td>
+                    <input id="production_volumes" name="production_volumes" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="manufacturing_lead_time">V7 :</label>
+                </td>
+                <td>
+                    <input id="manufacturing_lead_time" name="manufacturing_lead_time" type="number"
+                        placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="manufacturing_costs">V8 :</label>
+                </td>
+                <td>
+                    <input id="manufacturing_costs" name="manufacturing_costs" type="number" placeholder="13"
+                        step="0.01"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="inspection_results">V9 :</label>
+                </td>
+                <td>
+                    <input id="inspection_results" name="inspection_results" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="defect_rates">V10 :</label>
+                </td>
+                <td>
+                    <input id="defect_rates" name="defect_rates" type="number" placeholder="13" step="0.01"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="routes">V11 :</label>
+                </td>
+                <td>
+                    <input id="routes" name="routes" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v12">V12 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v12" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v13">V13 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v13" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v14">V14 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v14" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v15">V15 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v15" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v16">V16 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v16" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v17">V17 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v17" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="v18">V18 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v18" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v19">V19 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v19" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v20">V20 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v20" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v21">V21 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v21" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v22">V22 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v22" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v23">V23 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v23" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v20">V24 :</label>
+                </td>
+                <td>
+                    <input id="v24" name="v24" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v25">V25 :</label>
+                </td>
+                <td>
+                    <input id="v25" name="v25" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v26">V26 :</label>
+                </td>
+                <td>
+                    <input id="v26" name="v26" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v27">V27 :</label>
+                </td>
+                <td>
+                    <input id="v27" name="v27" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v28">V28 :</label>
+                </td>
+                <td>
+                    <input id="v28" name="v28" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="amt">Amount :</label>
+                </td>
+                <td>
+                    <input id="amt" name="amt" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit">Submit</button>
+                </td>
+                <td>
+                    <button type="reset">Reset</button>
+                </td>
+            </tr>
+        </form>
+    </table>
+    <br>
+    <div style="margin-left: 25px;">
+        <h6>Output : 0 - No Fraud || 1 - Fraud </h6>
+        <p>Predicted Classification : {{ x | safe}}</p>
+    </div>
+    <div style="margin-left: 25px;">
+        <p>
+            <b>First Modal Graph:</b><br>
+            <img src="static/images/try1.png">
+        </p>
+    </div>
+    <br>
+    <br>
+
+    <h4 style="margin-left: 15px;">K Neighbors Classification :</h4>
+    <br>
+    <table style="margin-left: 25px;">
+        <form id="form1" action="{{ url_for('predict1')}}" method="post">
+            <tr>
+                <td>
+                    <label for="sku">Time :</label>
+                </td>
+                <td>
+                    <input id="sku" name="sku" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="price">V1 :</label>
+                </td>
+                <td>
+                    <input id="price" name="price" type="number" placeholder="13" step="0.01"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="revenue_generated">V2 :</label>
+                </td>
+                <td>
+                    <input id="revenue_generated" name="revenue_generated" type="number" placeholder="13"
+                        step="0.01"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="lead_times">V3 :</label>
+                </td>
+                <td>
+                    <input id="lead_times" name="lead_times" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="shipping_costs">V4 :</label>
+                </td>
+                <td>
+                    <input id="shipping_costs" name="shipping_costs" type="number" placeholder="13" step="0.01"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="lead_time">V5 :</label>
+                </td>
+                <td>
+                    <input id="lead_time" name="lead_time" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="production_volumes">V6 :</label>
+                </td>
+                <td>
+                    <input id="production_volumes" name="production_volumes" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="manufacturing_lead_time">V7 :</label>
+                </td>
+                <td>
+                    <input id="manufacturing_lead_time" name="manufacturing_lead_time" type="number"
+                        placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="manufacturing_costs">V8 :</label>
+                </td>
+                <td>
+                    <input id="manufacturing_costs" name="manufacturing_costs" type="number" placeholder="13"
+                        step="0.01"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="inspection_results">V9 :</label>
+                </td>
+                <td>
+                    <input id="inspection_results" name="inspection_results" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="defect_rates">V10 :</label>
+                </td>
+                <td>
+                    <input id="defect_rates" name="defect_rates" type="number" placeholder="13" step="0.01"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="routes">V11 :</label>
+                </td>
+                <td>
+                    <input id="routes" name="routes" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v12">V12 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v12" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v13">V13 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v13" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v14">V14 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v14" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v15">V15 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v15" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v16">V16 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v16" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v17">V17 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v17" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="v18">V18 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v18" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v19">V19 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v19" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v20">V20 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v20" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v21">V21 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v21" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v22">V22 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v22" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v23">V23 :</label>
+                </td>
+                <td>
+                    <input id="costs" name="v23" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v20">V24 :</label>
+                </td>
+                <td>
+                    <input id="v24" name="v24" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v25">V25 :</label>
+                </td>
+                <td>
+                    <input id="v25" name="v25" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v26">V26 :</label>
+                </td>
+                <td>
+                    <input id="v26" name="v26" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v27">V27 :</label>
+                </td>
+                <td>
+                    <input id="v27" name="v27" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="v28">V28 :</label>
+                </td>
+                <td>
+                    <input id="v28" name="v28" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="amt">Amount :</label>
+                </td>
+                <td>
+                    <input id="amt" name="amt" type="number" placeholder="13"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit">Submit</button>
+                </td>
+                <td>
+                    <button type="reset">Reset</button>
+                </td>
+            </tr>
+        </form>
+    </table>
+    <br>
+    <div style="margin-left: 25px;">
+        <h6>Output : 0 - No Fraud || 1 - Fraud </h6>
+        <p>Predicted Classification : {{ x1 | safe}}</p>
+    </div>
+
+    <!-- Footer Start -->
+
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
